@@ -1,34 +1,38 @@
-Resume Screening 🤖📄 This repository contains a machine learning project focused on automating the resume screening process using Python. The goal is to create a model that efficiently and accurately evaluates resumes based on predefined criteria. 🚀
+# Resume Screening: Job-Category Classification
 
-resume cover
+Classifies a resume's raw text into one of 25 job categories (for example Data Science, HR, Java Developer
+or Database), as a first automated step in screening.
 
-Table of Contents 📚 Why Automate Resume Screening? Project Overview Technologies & Tools 🔧 Application Flow 🔄 AI Innovations in Screening 🧠 Getting Started 🚀 Usage 🖥️ Dataset 📊 Machine Learning Models 🧬 Performance Evaluation 📈 Contributing 🤝 License 📝 Contact Information 📧 Why Automate Resume Screening? 💼 Recruitment processes involve reviewing a huge number of resumes, often in the thousands. Screening resumes manually is time-consuming, and hiring teams may overlook key details. Automation helps to reduce human error, accelerate the recruitment process, and ensure a more objective evaluation. Our solution leverages AI to screen resumes in minutes instead of days, saving both time and effort. Project Overview 🧐 Resume screening refers to evaluating a candidate’s qualifications based on their resume. By using AI and machine learning, we can automate this process, ensuring faster, unbiased, and more accurate candidate shortlisting.
-The goal is to build a smart system that can analyze resumes based on various factors like experience, skills, and education, and suggest the best candidates for each job role.
+## Pipeline
 
-Technologies & Tools 🔧 This project leverages the following tools and technologies:
+1. **Data:** `resume_dataset.csv` has 169 resumes in 25 categories, with columns `Category` and `Resume`.
+2. **Cleaning:** regular expressions remove URLs, RT/cc markers, hashtags, mentions, punctuation, non-ASCII
+   characters and extra whitespace.
+3. **Features:** TF-IDF with sublinear term frequency, English stop words removed, and the top 1,500
+   features kept.
+4. **Model:** a one-vs-rest k-nearest-neighbours classifier, evaluated with accuracy and a per-category
+   classification report.
 
-Machine Learning & AI Models KNN (K-Nearest Neighbors): A classification algorithm that makes predictions based on the nearest data points. Logistic Regression: A simple yet effective model for binary classification. Support Vector Machines (SVM): A powerful classifier that works well with high-dimensional data. Random Forest: An ensemble learning method using multiple decision trees to improve accuracy. Neural Networks: Simulating the human brain to perform complex tasks like resume screening. Libraries & Frameworks NumPy: For numerical computations and handling arrays. Pandas: For data manipulation and analysis. Matplotlib & Seaborn: For data visualization and insights. Scikit-learn: For building machine learning models and evaluation. NLTK: For Natural Language Processing tasks like tokenization and text preprocessing. Application Flow 🔄 The resume screening process is divided into the following steps:
+## Results
 
-Data Preprocessing: Clean and structure the resume data (e.g., extracting skills, education, and work experience). Feature Extraction: Convert resumes into meaningful features for classification (like keywords, experience years, etc.). Model Training: Train various machine learning models on labeled data. Resume Screening: Input new resumes into the trained models to predict if the candidate fits the job requirements. Evaluation: Assess the models’ accuracy, precision, recall, and F1-score. AI Innovations in Screening 🧠 AI for recruiting is revolutionizing the hiring process! Here's how:
+| Split | Accuracy |
+|---|---|
+| Train | 0.88 |
+| Test | **0.79** |
 
-Automated Resume Parsing: AI can automatically parse and analyze resumes to identify key skills, experiences, and qualifications. Predictive Hiring: AI can predict which candidates are most likely to succeed in a role based on historical data. Bias Reduction: By using algorithms, AI can help reduce unconscious biases in the hiring process, ensuring a more diverse and equitable candidate pool. Integration: The technology can seamlessly integrate with existing Applicant Tracking Systems (ATS), streamlining the recruitment process without disrupting workflows. Getting Started 🚀 To get started with the project:
+With only 169 resumes spread over 25 classes, many categories have fewer than 10 examples. The results are
+therefore a baseline. More data, or embeddings from a pretrained language model, are the obvious next step.
 
-Clone the repository to your local machine: Copy git clone https://github.com/Divabhattacharya/Machine-Learning-.git cd Machine-Learning- Install required dependencies: Copy pip install -r requirements.txt Usage 🖥️ Step-by-Step Usage: Prepare Your Dataset: Ensure you have a collection of resumes in a structured format. Preprocess the Data: Use the provided scripts to clean and preprocess the resumes. Train the Model: Train your machine learning models using the Jupyter notebooks. Predict & Screen Resumes: Use the trained models to classify new resumes. Dataset 📊 This project uses a dataset of resumes collected from various sources. The dataset includes features like:
+## Files
 
-Skills (e.g., Python, Java, etc.) Experience (number of years in a role) Education (degree, university, etc.) Data is preprocessed to extract these key features, which are then fed into the machine learning models.
+| File | Contents |
+|---|---|
+| `Resume_Screening.ipynb` | Exploration, cleaning, features, model and evaluation |
+| `resume_dataset.csv` | Labelled resumes |
 
-Machine Learning Models 🧬 We use multiple machine learning algorithms to evaluate resumes based on key features. The models included are:
+## Run
 
-Logistic Regression Support Vector Machines (SVM) Random Forest Neural Networks Each model is trained and evaluated using accuracy, precision, recall, and F1-score as metrics.
-
-Performance Evaluation 📈 The models are evaluated on their ability to classify resumes accurately. We measure:
-
-Accuracy: How often the model correctly classifies resumes. Precision: The accuracy of positive predictions (e.g., correctly identifying a qualified candidate). Recall: The model’s ability to find all relevant candidates. F1-Score: The balance between precision and recall. Contributing 🤝 Contributions are welcome! If you have ideas for improvements or new features, feel free to:
-
-Open an issue. Submit a pull request. License 📝 This project is licensed under the MIT License. See the LICENSE file for more details.
-
-Contact Information 📧
-
-For any inquiries or collaboration:
-
-Diva Bhattacharya GitHub:Divabhattacharya
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn nltk
+jupyter notebook Resume_Screening.ipynb
+```
